@@ -6,13 +6,15 @@ import gspread
 from google.oauth2.service_account import Credentials
 from fastapi.middleware.cors import CORSMiddleware
 import os
+import json
 
 app = FastAPI()
 
 # Autenticación de Google Sheets
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-credentials_path = os.path.join(os.path.dirname(__file__), 'credentials.json')
-creds = Credentials.from_service_account_file(credentials_path, scopes=scope)
+credentials_json = os.getenv("GOOGLE_CREDENTIALS")
+credentials_info = json.loads(credentials_json)
+creds = Credentials.from_service_account_info(credentials_info, scopes=scope)
 client = gspread.authorize(creds)
 
 app.add_middleware(
