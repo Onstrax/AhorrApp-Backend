@@ -5,17 +5,19 @@ from datetime import datetime, timedelta
 import gspread
 from google.oauth2.service_account import Credentials
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 app = FastAPI()
 
 # Autenticación de Google Sheets
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = Credentials.from_service_account_file("credentials.json", scopes=scope)
+credentials_path = os.path.join(os.path.dirname(__file__), 'credentials.json')
+creds = Credentials.from_service_account_file(credentials_path, scopes=scope)
 client = gspread.authorize(creds)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200"],  # Cambia esto por la URL donde se desplegará tu frontend
+    allow_origins=["http://localhost:4200", "https://ahorrapp.netlify.app"],  # Permitir ambas URLs
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
