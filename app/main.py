@@ -12,7 +12,7 @@ from passlib.context import CryptContext
 from pymongo import ReturnDocument
 
 
-MONGO_DETAILS = "mongodb+srv://Onstrax:Bellezo17@ahorrapp.qgqpw.mongodb.net/?retryWrites=true&w=majority&appName=AhorrApp"
+MONGO_DETAILS = os.getenv("MONGO_DETAILS")
 
 client = AsyncIOMotorClient(MONGO_DETAILS)
 database = client.AhorrAppDB
