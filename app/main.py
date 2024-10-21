@@ -2,8 +2,6 @@ from fastapi import FastAPI, HTTPException, Body
 from pydantic import BaseModel
 from typing import List
 from datetime import datetime, timedelta
-import gspread
-from google.oauth2.service_account import Credentials
 from fastapi.middleware.cors import CORSMiddleware
 import os
 import json
