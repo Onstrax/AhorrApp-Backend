@@ -1,7 +1,5 @@
 fastapi
 uvicorn
-gspread
-google-auth
-oauth2client
 passlib
 bcrypt
+pymongo
